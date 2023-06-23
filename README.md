@@ -56,6 +56,6 @@
 
 ## 구성원
 
-|  <img src="https://avatars.githubusercontent.com/u/79046106?v=4" alt="" width=200> | <img src="https://avatars.githubusercontent.com/u/90550065?v=4" alt="" width=200> | <img src="https://avatars.githubusercontent.com/u/91937954?v=4" alt="" width=200> | <img src="https://avatars.githubusercontent.com/u/71651608?v=4" alt="" width=200> |
-| :-------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: |
-|  **[로건](https://github.com/70825)** | [로이스](https://github.com/TaeyeonRoyce) | [제나](https://github.com/yenawee) | [제리](https://github.com/Hyeonjae-K) |
+|  <img src="https://avatars.githubusercontent.com/u/79046106?v=4" alt="" width=200> | <img src="https://avatars.githubusercontent.com/u/90550065?v=4" alt="" width=200> | <img src="https://avatars.githubusercontent.com/u/91937954?v=4" alt="" width=200> | <img src="https://avatars.githubusercontent.com/u/71651608?v=4" alt="" width=200> | <img src="https://avatars.githubusercontent.com/u/77962265?v=4" alt="" width=200> |
+| :-------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: |
+|  [로건](https://github.com/70825) | [로이스](https://github.com/TaeyeonRoyce) | [제나](https://github.com/yenawee) | [제리](https://github.com/Hyeonjae-K) | [모디](https://github.com/jaehee329) |
