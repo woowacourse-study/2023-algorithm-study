@@ -1,4 +1,4 @@
-//2023.07.04
+//2023.07.05
 //https://www.acmicpc.net/problem/1082
 
 import java.io.BufferedReader;
