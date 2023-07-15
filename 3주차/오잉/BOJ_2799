@@ -1,0 +1,38 @@
+package week3.pr;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class BOJ_2799 {
+    private static int M;
+    private static int N;
+    private static int[] ans = new int[5];
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
+
+        int[] cnt = new int[N];
+        for(int i=1; i<5*M+1; i++) {
+            String s = br.readLine();
+            for(int j=0; j<N; j++) {
+                if(s.charAt(5*j+1)=='*') {
+                    cnt[j]++;
+                }
+            }
+            if (i%5==0) {
+                for(int k=0; k<N; k++) {
+                    ans[cnt[k]]++;
+                }
+                cnt = new int[N];
+            }
+        }
+        for (int i : ans) {
+            System.out.print(i+" ");
+        }
+    }
+}
