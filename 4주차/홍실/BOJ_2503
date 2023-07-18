@@ -1,0 +1,109 @@
+import static java.lang.Integer.parseInt;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toUnmodifiableList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+public class Main {
+
+    static BufferedReader br;
+    static List<Question> questions = new ArrayList<>();
+
+    static class Question {
+
+        public final List<Integer> balls;
+        public final int strike;
+        public final int ball;
+
+        public Question(final String ballString, final int strike, final int ball) {
+            this.strike = strike;
+            this.ball = ball;
+            this.balls = parse(ballString);
+        }
+
+        private List<Integer> parse(final String ballString) {
+            return stream(ballString.split(""))
+                    .map(Integer::parseInt)
+                    .collect(toUnmodifiableList());
+        }
+
+        public boolean checkBallAndStrike(final List<Integer> numbers) {
+            int strike = 0;
+            int ball = 0;
+
+            for (int i = 0; i < 3; i++) {
+                if (balls.contains(numbers.get(i))) {
+                    if (numbers.get(i) == balls.get(i)) {
+                        strike += 1;
+                    } else {
+                        ball += 1;
+                    }
+                }
+            }
+
+            return this.strike == strike && this.ball == ball;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        input();
+        int ans = 0;
+
+        for (int i = 123; i <= 987; i++) {
+            if (!checkDuplicate(i) || !checkContainZero(i)) {
+                continue;
+            }
+
+            final int hundred = i / 100;
+            final int ten = (i % 100) / 10;
+            final int one = (i % 10);
+
+            final long count = questions.stream()
+                    .filter(question -> question.checkBallAndStrike(List.of(hundred, ten, one)))
+                    .count();
+            if (count == questions.size()) {
+                ans += 1;
+            }
+        }
+
+        System.out.println(ans);
+    }
+
+    private static boolean checkContainZero(final int number) {
+        final int hundred = number / 100;
+        final int ten = (number % 100) / 10;
+        final int one = (number % 10);
+
+        return hundred != 0
+                && ten != 0
+                && one != 0;
+    }
+
+    private static boolean checkDuplicate(final int number) {
+        final int hundred = number / 100;
+        final int ten = (number % 100) / 10;
+        final int one = (number % 10);
+
+        return hundred != ten
+                && hundred != one
+                && ten != one;
+    }
+
+    private static void input() throws IOException {
+        br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        final int count = parseInt(st.nextToken());
+        for (int i = 0; i < count; i++) {
+            st = new StringTokenizer(br.readLine());
+            final String value = st.nextToken();
+            final int strike = parseInt(st.nextToken());
+            final int ball = parseInt(st.nextToken());
+            questions.add(new Question(value, strike, ball));
+        }
+    }
+}
