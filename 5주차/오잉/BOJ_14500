@@ -1,0 +1,84 @@
+package week5;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class BOJ_14500 {
+    private static int[] dx = {-1, 0, +1, 0};
+    private static int[] dy = {0, +1, 0, -1};
+    private static int N;
+    private static int M;
+
+    private static int max = 0;
+    private static int[][] board;
+    private static boolean[][] visited;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        board = new int[N][M];
+        visited = new boolean[N][M];
+
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine(), " ");
+            for (int j = 0; j < M; j++) {
+                board[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                visited[i][j] = true;
+                pro(i, j, 1, board[i][j]);
+                visited[i][j] = false;
+                extra(i, j, 0, 0, board[i][j]);
+            }
+        }
+
+        System.out.println(max);
+    }
+
+    private static void pro(final int y, final int x, final int cnt, final int sum) {
+        if (cnt == 4) {
+            max = Math.max(sum, max);
+            return;
+        }
+
+        for (int d = 0; d < 4; d++) {
+            int ny = y + dy[d];
+            int nx = x + dx[d];
+
+            if (ny < 0 || ny >= N || nx < 0 || nx >= M || visited[ny][nx]) {
+                continue;
+            }
+
+            visited[ny][nx] = true;
+            pro(ny, nx, cnt + 1, sum + board[ny][nx]);
+            visited[ny][nx] = false;
+
+        }
+    }
+
+    private static void extra(final int y, final int x, final int cnt, final int start, final int sum) {
+        if (cnt == 3) {
+            max = Math.max(max, sum);
+            return;
+        }
+
+        for (int d = start; d < 4; d++) {
+            int ny = y + dy[d];
+            int nx = x + dx[d];
+
+            if (ny < 0 || ny >= N || nx < 0 || nx >= M) {
+                continue;
+            }
+
+            extra(y, x, cnt + 1, d + 1, sum + board[ny][nx]);
+        }
+    }
+
+}
