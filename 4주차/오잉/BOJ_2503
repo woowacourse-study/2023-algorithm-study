@@ -1,0 +1,72 @@
+package week4.pr;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringTokenizer;
+
+public class BOJ_2503 {
+    private static int N;
+    private static boolean[] num = new boolean[1000];
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            String tar = st.nextToken();
+            int tarS = Integer.parseInt(st.nextToken());
+            int tarB = Integer.parseInt(st.nextToken());
+            pro(tar, tarS, tarB);
+        }
+
+        int cnt = 0;
+        for (int i = 111; i < 1000; i++) {
+            if ((!num[i])&&validateZero(i) && validateDuplicate(i)) {
+                cnt++;
+            }
+        }
+        System.out.println(cnt);
+    }
+
+    private static void pro(final String tar, final int tarS, final int tarB) {
+        int idx = 111;
+
+        while (idx < 1000) {
+            String com = Integer.toString(idx);
+            int comS = 0;
+            int comB = 0;
+            for (int i = 0; i < 3; i++) {
+                if (com.charAt(i) == tar.charAt(i)) {
+                    comS++;
+                } else if (com.contains(Character.toString(tar.charAt(i)))) {
+                    comB++;
+                }
+            }
+            if ((comS != tarS) || (comB != tarB)) {
+                num[idx] = true;
+            }
+            idx++;
+        }
+    }
+
+    public static boolean validateZero(int i) {
+        String num = Integer.toString(i);
+        if (num.contains("0")) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validateDuplicate(int i) {
+        String x = Integer.toString(i);
+        List<Character> numList = Arrays.asList(x.charAt(0), x.charAt(1), x.charAt(2));
+        if (numList.stream().distinct().count() != 3) {
+            return false;
+        }
+        return true;
+    }
+}

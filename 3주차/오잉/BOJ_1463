@@ -1,0 +1,40 @@
+package week3.pr;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+// [1로만들기](https://www.acmicpc.net/problem/1463)
+
+public class BOJ_1463 {
+    private static int X;
+    private static int[] d;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        X = Integer.parseInt(br.readLine());
+
+        d = new int[X+1];
+        d[0] = d[1] = 0;
+
+        System.out.println(func(X));
+    }
+
+    public static int func(int n) {
+        if (n<2) {
+            return 0;
+        }
+        if (d[n]>0) {
+            return d[n];
+        }
+
+        d[n] = func(n-1) + 1;
+        if(n%3==0) {
+            d[n] = Math.min(func(n/3)+1, d[n]);
+        }
+        if(n%2==0) {
+            d[n] = Math.min(func(n/2)+1, d[n]);
+        }
+        return d[n];
+    }
+}
